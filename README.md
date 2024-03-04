@@ -1,5 +1,3 @@
-Read Me File
-Overview 
 The cyber challenges project aims to compare the experiences of individuals with IDD and Down Syndrome on social media by extracting insights from twitter-based datasets: IDD dataset and Down_syndrome dataset. The datasets were uploaded on Kaggle, where we performed the analysis. The analysis was performed in a Python environment using the BERT model for Negative/Positive/Neutral sentiment predictions, and LDA model for topic modelling.
 Initial Setup: Importing Libraries 
 The process of importing is demonstrated in the code snippet shown below:
