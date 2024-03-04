@@ -1,0 +1,478 @@
+<html>
+       
+        <head> 
+               	<title>Project files</title>
+	 	<meta charset="UTF-8">
+    		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    		<style>
+       		 pre {
+                    background-color: #f4f4f4;
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                    overflow: auto;
+                    font-size: 14px;
+                     }
+        	 </style>
+        </head>
+        <body> 
+       		<h1>Cyber Challenges Code</h1>
+		<h2>Loading Data</h2>
+		<pre><code class="python">
+port numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from wordcloud import WordCloud, STOPWORDS
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from gensim import corpora, models
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics import classification_report, confusion_matrix
+from gensim.models import LdaModel
+from gensim.corpora import Dictionary
+from gensim.models import word2vec
+from tabulate import tabulate
+from sklearn.decomposition import LatentDirichletAllocation
+from keras.preprocessing.text import Tokenizer
+import tensorflow as tf
+
+data = pd.read_csv("/kaggle/input/disability-data/ID dataset0.CSV", encoding="ISO-8859-1")
+data_2 = pd.read_csv("/kaggle/input/disability-data/Down Syndrome Dataset0.csv", encoding="ISO-8859-1")
+data.head()
+data_2.head()
+nltk.download('punkt')
+       		</code></pre>
+
+   		<h2>Preprocessing</h2>
+    			<pre><code class="python">
+def clean_text(text):
+    '''
+        Make text lowercase, remove text in square brackets,remove links,remove punctuation
+        and remove words containing numbers.
+    '''
+    text = text.lower()
+    text = re.sub('\[.*?\]', '', text)
+    text = re.sub('https?://\S+|www\.\S+', '', text)
+    text = re.sub('<.*?>+', '', text)
+    text = re.sub('[%s]' % re.escape(string.punctuation), '', text)
+    text = re.sub('\n', '', text)
+    text = re.sub('\w*\d\w*', '', text)
+    return text
+
+# Defining a function to remove emoji's
+def removeEmoji(text):
+    emoji = re.compile(
+        "["
+        u"\U0001F300-\U0001F5FF"  # symbols & pictographs
+        u"\U0001F600-\U0001F64F"  # emotion icons
+        u"\U0001F1E0-\U0001F1FF"  # flags
+        u"\U0001F680-\U0001F6FF"  # transport & map symbols
+        u"\U00002702-\U000027B0"
+        u"\U000024C2-\U0001F251"
+        "]+", flags=re.UNICODE
+    )
+    return emoji.sub(r'', text)
+     		</code></pre>
+
+          	<h2>LDA Model and Topic Modelling</h2>
+    		<pre><code class="python">
+#Apply preprocessing to the two datasets
+data = data.dropna(subset=['tweet'])
+data['clean_text'] = data['tweet'].apply(clean_text)
+data_2 = data_2.dropna(subset=['tweet'])
+data_2['clean_text'] = data_2['tweet'].apply(clean_text)
+
+#create dictionary for the datasets
+documents_data = [text.split() for text in data['clean_text']]
+
+data_dictionary = corpora.Dictionary(documents_data)
+
+documents_data_2 = [text.split() for text in data['clean_text']]
+
+data_2_dictionary = corpora.Dictionary(documents_data_2)
+
+# Convert thedataset into a  bag-of-words (BoW) representation
+data_corpus = [data_dictionary.doc2bow(doc) for doc in documents_data]
+data_2_corpus = [data_2_dictionary.doc2bow(doc) for doc in documents_data_2]
+
+# Train the LDA models for each dataset
+num_topics = 20  
+
+data_lda_model = models.LdaModel(data_corpus, num_topics=num_topics, id2word=data_dictionary, passes=10)
+data_2_lda_model = models.LdaModel(data_2_corpus, num_topics=num_topics, id2word=data_2_dictionary, passes=10)
+
+# Print the topics and keywords for Williams syndrome and Intellectual disability
+print("ID dataset Topics:")
+for idx, topic in data_lda_model.print_topics(-1):
+    print(f'Topic {idx + 1}: {topic}')
+# Print the topics and keywords for down syndrome
+
+print("Down Syndrome Dataset Topics:")
+for idx, topic in data_2_lda_model.print_topics(-1):
+    print(f'Topic {idx + 1}: {topic}')
+# dominant topics for in the datasets
+print("ID Dataset Dominant Topics:")
+for i, row in enumerate(data_lda_model[data_corpus]):
+    row = sorted(row, key=lambda x: (x[1]), reverse=True)
+    print(f"Document {i + 1}: Topic {row[0][0] + 1} (Probability: {row[0][1]})")
+
+print("Down Syndrome Dataset Dominant Topics:")
+for i, row in enumerate(data_2_lda_model[data_2_corpus]):
+    row = sorted(row, key=lambda x: (x[1]), reverse=True)
+    print(f"Document {i + 1}: Topic {row[0][0] + 1} (Probability: {row[0][1]})")
+# data['Text'] = data['Text'].astype(str)
+data['tweet'] = data['tweet'].apply(lambda x: clean_text(x))
+
+
+data['tweet']=data['tweet'].apply(lambda x: removeEmoji(x))
+data['tweet'].apply(lambda x:len(str(x).split())).max()
+data['tweet'].head()
+
+data_2['tweet'] = data_2['tweet'].apply(lambda x: clean_text(x))
+
+data_2['tweet']=data_2['tweet'].apply(lambda x: removeEmoji(x))
+data_2['tweet'].apply(lambda x:len(str(x).split())).max()
+data_2['tweet'][20:80]
+
+ word_cloud = WordCloud(
+     background_color='white',
+     stopwords=set(STOPWORDS),
+     max_words=50,
+     max_font_size=40,
+     scale=5,
+     random_state=1
+ ).generate(str(data['tweet']))
+
+fig = plt.figure(1, figsize=(10,10))
+plt.axis('off')
+fig.suptitle('Word Cloud for top 50 prevelant words in the tweets of Intellectual Disability', fontsize=20)
+fig.subplots_adjust(top=2.3)
+plt.imshow(word_cloud)
+plt.show()
+
+word_cloud = WordCloud(
+     background_color='white',
+     stopwords=set(STOPWORDS),
+     max_words=50,
+     max_font_size=40,
+     scale=5,
+     random_state=1
+ ).generate(str(data_2['tweet']))
+
+fig = plt.figure(1, figsize=(10,10))
+plt.axis('off')
+fig.suptitle('Word Cloud for top 50 prevelant words in the tweets of Down Syndrome', fontsize=20)
+fig.subplots_adjust(top=2.3)
+plt.imshow(word_cloud)
+plt.show()
+    		</code></pre>
+
+		<h2>Sentiment Labelling</h2>
+    		<pre><code class="python">
+nltk.download("vader_lexicon")
+
+sentiments = SentimentIntensityAnalyzer()
+
+data["Positive"] = [sentiments.polarity_scores(i)["pos"] for i in data["tweet"]]
+data["Negative"] = [sentiments.polarity_scores(i)["neg"] for i in data["tweet"]]
+data["Neutral"] = [sentiments.polarity_scores(i)["neu"] for i in data["tweet"]]
+data['Compound'] = [sentiments.polarity_scores(i)["compound"] for i in data["tweet"]]
+# Labeling sentiments into the dataset
+
+score = data["Compound"].values
+sentiment = []
+for i in score:
+    if i >= 0.05 :
+        sentiment.append('Positive')
+    elif i <= -0.05 :
+        sentiment.append('Negative')
+    else:
+        sentiment.append('Neutral')
+data["Sentiment"] = sentiment
+data.head()
+sns.countplot(data=data, x='Sentiment')
+
+sentiment_counts = data["Sentiment"].value_counts()
+sentiment_percentages = (sentiment_counts / len(data)) * 100
+
+# Plotting the pie chart
+plt.figure(figsize=(8, 6))
+plt.pie(sentiment_percentages, labels=sentiment_percentages.index, autopct='%1.1f%%')
+plt.title("Sentiment Distribution for ID profiles")
+plt.axis('equal')
+plt.show()
+
+data_2["Positive"] = [sentiments.polarity_scores(i)["pos"] for i in data_2["tweet"]]
+data_2["Negative"] = [sentiments.polarity_scores(i)["neg"] for i in data_2["tweet"]]
+data_2["Neutral"] = [sentiments.polarity_scores(i)["neu"] for i in data_2["tweet"]]
+data_2['Compound'] = [sentiments.polarity_scores(i)["compound"] for i in data_2["tweet"]]
+
+# Labeling sentiments into the dataset
+
+score = data_2["Compound"].values
+sentiment = []
+for i in score:
+    if i >= 0.05 :
+        sentiment.append('Positive')
+    elif i <= -0.05 :
+        sentiment.append('Negative')
+    else:
+        sentiment.append('Neutral')
+data_2["Sentiment"] = sentiment
+data_2.head()
+sns.countplot(data=data_2, x='Sentiment')
+
+# Calculate sentiment percentages
+sentiment_counts = data_2["Sentiment"].value_counts()
+sentiment_percentages = (sentiment_counts / len(data_2)) * 100
+
+# Plotting the pie chart
+plt.figure(figsize=(8, 6))
+plt.pie(sentiment_percentages, labels=sentiment_percentages.index, autopct='%1.1f%%')
+plt.title("Sentiment Distribution for down syndrome Profiles")
+plt.axis('equal')
+plt.show()
+    		</code></pre>
+
+		<h2>Model Training</h2>
+    		<pre><code class="python">
+lb= LabelEncoder()
+
+lb.fit(data['Sentiment'])
+y_train_down_syndrome = lb.transform(data['Sentiment'].to_list())
+y_train_idd = lb.transform(data_2['Sentiment'].to_list())
+
+# Splits Dataset into Training and Testing set
+x_train_down_syndrome, x_test_down_syndrome, y_train_down_syndrome, y_test_down_syndrome = train_test_split(
+    data["tweet"], y_train_down_syndrome, test_size=0.2, random_state=7
+)
+# Splits Dataset into Training and Testing set
+x_train_idd, x_test_idd, y_train_idd, y_test_idd = train_test_split(
+    data_2["tweet"], y_train_idd, test_size=0.2, random_state=7
+)
+     		<h2>Transformer classification Model</h2>
+MAX_SEQUENCE_LENGTH = 40
+down_syndrome_tokenizer = Tokenizer()
+down_syndrome_tokenizer.fit_on_texts(data.tweet)
+
+word_index_down_syndrome = down_syndrome_tokenizer.word_index
+vocab_size_down_syndrome = len(down_syndrome_tokenizer.word_index) + 1
+print("Vocabulary Size :", vocab_size_down_syndrome)
+x_train_down_syndrome = tf.keras.utils.pad_sequences(down_syndrome_tokenizer.texts_to_sequences(x_train_down_syndrome.ravel()), maxlen=MAX_SEQUENCE_LENGTH)
+x_test_down_syndrome = tf.keras.utils.pad_sequences(down_syndrome_tokenizer.texts_to_sequences(x_test_down_syndrome.ravel()), maxlen=MAX_SEQUENCE_LENGTH)
+
+idd_tokenizer = Tokenizer()
+idd_tokenizer.fit_on_texts(data_2.tweet)
+
+word_index_idd = idd_tokenizer.word_index
+vocab_size_idd = len(idd_tokenizer.word_index) + 1
+print("Vocabulary Size :", vocab_size_idd)
+
+x_train_idd = tf.keras.utils.pad_sequences(idd_tokenizer.texts_to_sequences(x_train_idd.ravel()), maxlen=MAX_SEQUENCE_LENGTH)
+x_test_idd = tf.keras.utils.pad_sequences(idd_tokenizer.texts_to_sequences(x_test_idd.ravel()), maxlen=MAX_SEQUENCE_LENGTH)
+
+from tensorflow.keras.layers import MultiHeadAttention, LayerNormalization, Dropout, Layer
+from tensorflow.keras.layers import Embedding, Input, GlobalAveragePooling1D, Dense
+from tensorflow.keras.callbacks import ReduceLROnPlateau
+from tensorflow.keras.models import Sequential, Model
+import warnings
+warnings.filterwarnings("ignore", category=np.VisibleDeprecationWarning)
+
+class TransformerBlock(Layer):
+    def __init__(self, embed_dim, num_heads, ff_dim, rate=0.1):
+        super(TransformerBlock, self).__init__()
+        self.att = MultiHeadAttention(num_heads=num_heads, key_dim=embed_dim)
+        self.ffn = Sequential(
+            [Dense(ff_dim, activation="relu"), 
+             Dense(embed_dim),]
+        )
+        self.layernorm1 = LayerNormalization(epsilon=1e-6)
+        self.layernorm2 = LayerNormalization(epsilon=1e-6)
+        self.dropout1 = Dropout(rate)
+        self.dropout2 = Dropout(rate)
+
+    def call(self, inputs, training):
+        attn_output = self.att(inputs, inputs)
+        attn_output = self.dropout1(attn_output, training=training)
+        out1 = self.layernorm1(inputs + attn_output)
+        ffn_output = self.ffn(out1)
+        ffn_output = self.dropout2(ffn_output, training=training)
+        return self.layernorm2(out1 + ffn_output)
+class TokenAndPositionEmbedding(Layer):
+    def __init__(self, maxlen, vocab_size, embed_dim):
+        super(TokenAndPositionEmbedding, self).__init__()
+        self.token_emb = Embedding(input_dim=vocab_size, output_dim=embed_dim)
+        self.pos_emb = Embedding(input_dim=maxlen, output_dim=embed_dim)
+
+    def call(self, x):
+        maxlen = tf.shape(x)[-1]
+        positions = tf.range(start=0, limit=maxlen, delta=1)
+        positions = self.pos_emb(positions)
+        x = self.token_emb(x)
+        return x + positions
+embed_dim = 32  # Embedding size for each token
+num_heads = 2  # Number of attention heads
+ff_dim = 32  # Hidden layer size in feed forward network inside transformer
+
+inputs = Input(shape=(MAX_SEQUENCE_LENGTH,))
+embedding_layer = TokenAndPositionEmbedding(MAX_SEQUENCE_LENGTH, vocab_size_down_syndrome, embed_dim)
+x = embedding_layer(inputs)
+transformer_block = TransformerBlock(embed_dim, num_heads, ff_dim)
+x = transformer_block(x)
+x = GlobalAveragePooling1D()(x)
+x = Dropout(0.1)(x)
+x = Dense(20, activation="relu")(x)
+x = Dropout(0.1)(x)
+outputs = Dense(3, activation="softmax")(x)
+
+model_down_syndrome = Model(inputs=inputs, outputs=outputs)
+
+model_down_syndrome.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
+
+ReduceLROnPlateau_ = ReduceLROnPlateau(factor=0.1, min_lr = 0.01, monitor = 'val_loss', verbose = 1)
+history_transformer = model_down_syndrome.fit(
+    x_train_down_syndrome, y_train_down_syndrome, batch_size=32, epochs=10,
+    validation_data=(x_test_down_syndrome, y_test_down_syndrome), callbacks=[ReduceLROnPlateau_]
+)
+scores_down_syndrome = model_down_syndrome.predict(x_test_down_syndrome, verbose=1, batch_size=10000)
+pred_down_syndrome = np.argmax(scores_down_syndrome, axis=1)
+report_down_syndrome = classification_report(y_test_down_syndrome, pred_down_syndrome, output_dict=True)
+
+embed_dim = 32  # Embedding size for each token
+num_heads = 2  # Number of attention heads
+ff_dim = 32  # Hidden layer size in feed forward network inside transformer
+
+inputs = Input(shape=(MAX_SEQUENCE_LENGTH,))
+embedding_layer = TokenAndPositionEmbedding(MAX_SEQUENCE_LENGTH, vocab_size_idd, embed_dim)
+x = embedding_layer(inputs)
+transformer_block = TransformerBlock(embed_dim, num_heads, ff_dim)
+x = transformer_block(x)
+x = GlobalAveragePooling1D()(x)
+x = Dropout(0.1)(x)
+x = Dense(20, activation="relu")(x)
+x = Dropout(0.1)(x)
+outputs = Dense(3, activation="softmax")(x)
+
+model_idd = Model(inputs=inputs, outputs=outputs)
+
+model_idd.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
+
+ReduceLROnPlateau_idd = ReduceLROnPlateau(factor=0.1, min_lr = 0.01, monitor = 'val_loss', verbose = 1)
+history_transformer_idd = model_idd.fit(
+    x_train_idd, y_train_idd, batch_size=32, epochs=10,
+    validation_data=(x_test_idd, y_test_idd), callbacks=[ReduceLROnPlateau_idd]
+)
+
+# Model 1 predictions
+scores_model_idd = model_idd.predict(x_test_idd, verbose=1, batch_size=10000)
+pred_model_idd = np.argmax(scores_model_idd, axis=1)
+report_model_idd = classification_report(y_test_idd, pred_model_idd, output_dict=True)
+
+# Model 2 predictions
+scores_model_down_syndrome = model_down_syndrome.predict(x_test_down_syndrome, verbose=1, batch_size=10000)
+pred_model_down_syndrome = np.argmax(scores_model_down_syndrome, axis=1)
+report_model_down_syndrome = classification_report(y_test_down_syndrome, pred_model_down_syndrome, output_dict=True)
+
+# Get class labels and metrics from the classification reports
+class_labels = list(report_model_idd.keys())[:-3]  # Exclude 'accuracy', 'macro avg', and 'weighted avg'
+precision_scores_model_idd = [report_model_idd[label]['precision'] for label in class_labels]
+recall_scores_model_idd = [report_model_idd[label]['recall'] for label in class_labels]
+f1_scores_model_idd = [report_model_idd[label]['f1-score'] for label in class_labels]
+
+precision_scores_model_down_syndrome = [report_model_down_syndrome[label]['precision'] for label in class_labels]
+recall_scores_model_down_syndrome = [report_model_down_syndrome[label]['recall'] for label in class_labels]
+f1_scores_model_down_syndrome = [report_model_down_syndrome[label]['f1-score'] for label in class_labels]
+
+# Create bar charts to visualize the metrics for both models
+plt.figure(figsize=(12, 6))
+x = range(len(class_labels))
+width = 0.35
+
+plt.bar(x, precision_scores_model_idd, width, label='Precision - Model IDD')
+plt.bar(x, recall_scores_model_idd, width, label='Recall - Model IDD', alpha=0.7)
+plt.bar(x, f1_scores_model_idd, width, label='F1-score - Model IDD', alpha=0.5)
+
+plt.bar([val + width for val in x], precision_scores_model_down_syndrome, width, label='Precision - Model down_syndrome')
+plt.bar([val + width for val in x], recall_scores_model_down_syndrome, width, label='Recall - Model down_syndrome', alpha=0.7)
+plt.bar([val + width for val in x], f1_scores_model_down_syndrome, width, label='F1-score - Model down_syndrome', alpha=0.5)
+
+plt.xlabel('Class')
+plt.ylabel('Score')
+plt.title('Comparison of Classification Metrics')
+plt.xticks([val + width/2 for val in x], class_labels, rotation=45)
+plt.legend()
+
+plt.tight_layout()
+plt.show()
+
+# Calculate percentages for precision, recall, and F1-score
+precision_percentages_model_idd = [score * 100 for score in precision_scores_model_idd]
+recall_percentages_model_idd = [score * 100 for score in recall_scores_model_idd]
+f1_percentages_model_idd = [score * 100 for score in f1_scores_model_idd]
+
+
+# Create a DataFrame to display the metrics
+metrics_df = pd.DataFrame({
+    'Class': class_labels,
+    'Precision - Model IDD': precision_percentages_model_idd,
+    'Recall - Model IDD': recall_percentages_model_idd,
+    'F1-score - Model IDD': f1_percentages_model_idd
+})
+
+# Display the DataFrame
+print(tabulate(metrics_df, headers='keys', tablefmt='grid', showindex=False))
+
+precision_percentages_model_down_syndrome = [score * 100 for score in precision_scores_model_down_syndrome]
+recall_percentages_model_down_syndrome = [score * 100 for score in recall_scores_model_down_syndrome]
+f1_percentages_model_down_syndrome = [score * 100 for score in f1_scores_model_down_syndrome]
+# Create a DataFrame to display the metrics
+metrics_df = pd.DataFrame({
+    'Class': class_labels,
+    'Precision - Model down_syndrome': precision_percentages_model_down_syndrome,
+    'Recall - Model down_syndrome': recall_percentages_model_down_syndrome,
+    'F1-score - Model down_syndrome': f1_percentages_model_down_syndrome
+})
+
+# Display the DataFrame
+print(tabulate(metrics_df, headers='keys', tablefmt='grid', showindex=False))
+    		</code></pre>
+
+		<h2>Sentiment Distribution using Transformers</h2>
+    		<pre><code class="python">
+# Obtain the classification report for Model IDD
+report_model_idd = classification_report(y_test_idd, pred_model_idd, output_dict=True)
+
+# Get the class labels and their corresponding frequencies
+class_labels_idd = list(report_model_idd.keys())[:-3]
+class_frequencies_idd = [report_model_idd[label]['support'] for label in class_labels_idd]
+class_labels_idd = [int(label) for label in class_labels_idd]
+
+# Plot the class frequencies for Model IDD
+plt.figure(figsize=(8, 6))
+plt.bar(lb.inverse_transform(class_labels_idd), class_frequencies_idd)
+plt.xlabel('Class')
+plt.ylabel('Frequency')
+plt.title('Class Frequencies - Model IDD')
+plt.xticks(rotation=45)
+plt.show()
+
+# Obtain the classification report for Model down syndrome
+report_model_down_syndrome = classification_report(y_test_down_syndrome, pred_model_down_syndrome, output_dict=True)
+
+# Get the class labels and their corresponding frequencies
+class_labels_down_syndrome = list(report_model_down_syndrome.keys())[:-3]
+class_frequencies_down_syndrome = [report_model_down_syndrome[label]['support'] for label in class_labels_down_syndrome]
+class_labels_down_syndrome = [int(label) for label in class_labels_down_syndrome]
+
+# Plot the class frequencies for Model down syndrome
+plt.figure(figsize=(8, 6))
+plt.bar(lb.inverse_transform(class_labels_down_syndrome), class_frequencies_down_syndrome)
+plt.xlabel('Class')
+plt.ylabel('Frequency')
+plt.title('Class Frequencies - Model down_syndrome')
+plt.xticks(rotation=45)
+plt.show()
+   		 </code></pre>
+        </body>
+</html>

@@ -1,0 +1,514 @@
+<html>
+<head>
+	<title>CYBER CHALLENGES FACED BY PEOPLE WITH INTELLECTUAL AND DEVELOPMENTAL DISABILITIES (IDD)</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<h1>CYBER CHALLENGES FACED BY PEOPLE WITH INTELLECTUAL AND DEVELOPMENTAL DISABILITIES (IDD)</h1>
+	<h2>Abstract</h2>
+	<p>.The study compares the experiences of individuals with learning disability and Down syndrome on online platforms such as Twitter. The posts on Twitter are highly subjective, which makes them appropriate for sentiment classification. In supervised machine learning approaches, data labeling is integral, and it is often difficult to manually verify labels on a large data set. The first step was to label the tweets for this study using Python-based libraries such as VADER and SentiWord Net. The sentiments were categorized as either positive, negative, or neutral based on the overall sentiment expressed in the tweets. Using the transformers model and LDA modeling, the study performs polarity detection of the sentiments and compares the polarity between the learning disability and Down syndrome participants. Results indicate that the groups broadly discussed topics associated with online safety, cyberbullying, and awareness. Both groups recorded high positive sentiments, with individuals with learning disability having 64.9% positive expressions and those with Down syndrome having 73% positive expressions in their online interactions. However, learning disability profiles exhibited increased negative experiences (16.2%) than their Down syndrome counterparts (9.1%). This suggests that learning disability/IDD profiles are more likely to experience cyber challenges, such as cyberbullying, derived from the common keywords in the tweets. Even though both groups focused on advocacy and empowerment, individuals with Down syndrome discussed the issue of awareness more.</p>
+	<h2>INTRODUCTION</h2>
+	<h3>Background</h3>
+	<p>The diagnosis of IDD could result in human rights restriction, discrimination, stigma, and lifelong labeling (Chadwick et al., 2013). However, the researchers believe that there has been a shift in attitude towards greater inclusion, tolerance, and acceptance, in society, among such individuals. Similarly, expectations of such societal abilities have soared alongside an increase in the complexity of effectively negotiating the modern world, for instance, assumptions on digital literacy. Statistics from the Internet World estimate that three billion individuals use the Internet across the globe and that a third of the global population has acquired smartphones. Researchers in cyberpsychology strongly believe that the Internet and especially social media platforms such as Twitter and Facebook, allow individuals to fully partake in their virtual and real communities, forge positive identities, receive support, and broaden their network of friends (García-Galera et al., 2014). However, Calton and Chapman (2016) claimed that little about Internet use by individuals diagnosed with IDD is known. 
+We live in a digitally dependent world, whereby, with various technologies, life is assumed to be streamlined and easier (Furnell et al., 2021). This is meant to allow access to services declared unavailable to individuals with a disability. The proliferation of the Internet has brought numerous benefits that individuals diagnosed with IDD could reap numerously (Chadwick et al., 2017). For instance, the Internet can be an efficient 'leveler' since individuals might mask specific characteristics once they feel that they might be discriminated against or excluded, or even worse, experimented with self-presentations because of their constraints. Despite the immense evolution of technology, there has been little change in reducing the digital divide, primarily through authentication methods. Authentication remains at the forefront in securing the information of Internet users, yet, for numerous individuals and especially ones with IDD, it poses issues in terms of security and usability (Furnell et al. 2021). 
+Seale (2014) postulates that the use of information technology and the Internet in daily life has entered a very critical age, mostly Compiegne (2011) additionally observes that the use of cyber technology has become a cornerstone in most of our societies and has acted as an essential aid to communication. This paradigm shift has helped people worldwide have easy access to information and entertainment. ICT has the capability of promoting information accessibility among people living with intellectual and developmental disabilities. However, according to Chadwick and Fullwood (2013), using ICT has caused a big digital divide between people with disabilities and other citizens. Studies have shown that instead of digital inclusion, the gap has continued to widen in society among people with intellectual disabilities. There are even barriers that hinder people with IDDs from effectively accessing social media, including Twitter.
+People with Downs Syndrome, according to Didden et al. (2009), face many challenges that are technical, structural, and at times cognitive. Most of the cognitive challenges are caused by the slow rate of their development and the general influence of peers in school and parents at home. Most people with Downs Syndrome have to move close to the screens or monitors because they are either short-sighted or long-sighted and have to make such adjustments to visualize and conceptualize what they are doing clearly. Such persons may also have psychomotor challenges (Seale, 2014). A good example is their challenges using a mouse and even the keyboard since their motor skills are not fully developed.
+
+Kowalski and Fedina (2011) argue that People with intellectual disabilities may be affected by the communities` influence on their access to digital platforms. Not many people with Down's Syndrome and other intellectual disabilities use social media platforms frequently; instead prefer sending messages directly through messages. The parents and other adults may have different opinions about the use of media platforms by the IDDs and hence determine the quality and time they spend online (Lussier-Desrochers et al., 2017). The community cannot start to think about IDDs exposure on the Internet and may not encourage them to be active users. Children with Downs Syndrome hardly use the Internet; if they do, they may be unable to use it properly. Their Constraints like these make the IDDs unsure and stagnate in unknowledgeable spots for so long. Seale (2001) suggests that there may be evidence to indicate that caregivers or even family members who work with IDDs may access banned sites such as those with pornographic or aggressive content (Seale,2001). Wright (2004) further agrees with Seale (2001) by indicating that the comprehension of risk by people that have an intellectual disability at times is different from that of caregivers and clinicians. 
+.</p>
+	<h3>Description of the Problem</h3>
+	<p>Cyberspace has grown tremendously in the past decade, and so have the challenges associated with cyberspace, especially social media. People with intellectual and developmental disabilities such as Down syndrome are largely ignored in the scholarly literature in terms of the challenges they face in cyberspace, and this study seeks to fill this gap. This study aims to address the research gap concerning the cyber challenges encountered by individuals with intellectual and developmental disabilities (IDD), with a particular emphasis on those with Down syndrome and general learning disabilities. The experiences and obstacles individuals encounter within social media platforms, particularly Twitter, have not been comprehensively explored in existing academic research.
+	.</p>
+
+	<h3>Research Aim and Objectives</h3>
+	<p>
+The current study sought to learn more about the difficulties people with Down syndrome and other forms of intellectual disability encounter when using social media. Understanding the complexities of online safety and cybersecurity issues faced by this demographic and identifying the unique obstacles they face while using social media platforms like Twitter can be summed up as the problem this study aims to solve.
+	<ol>
+        	<li>: 
+Examine information from the Twitter accounts of people with Down syndrome and other forms of learning disability to pinpoint hot-button issues and ongoing conversations. Through this analysis, we will gain an understanding of the topics and concerns commonly raised by people with IDD online.
+		.</li>
+        	<li>: 
+Evaluate how people with Down syndrome and other forms of general learning disability use social media compared to those without IDD. Several factors will be investigated, such as posting style, sentiment analysis, and interaction patterns. We aim to learn more about how people with IDD use social media by comparing and contrasting their online behavior.
+		.</li>
+        	<li>:
+Learn how involved parents and other caretakers are in helping children with Down syndrome and other learning disabilities learn to use and enjoy digital technologies safely and responsibly. This study investigates how caregivers can best help their loved ones with IDD stay safe and secure while using social networking sites.
+		.</li>
+		<li>:
+Investigate how people with Down syndrome and other learning disabilities can be better protected online and how this can be done through interventions, strategies, or technological solutions. This goal seeks to determine actionable steps that can be taken to make the Internet a more secure place for people with intellectual and developmental disabilities.
+		.</li>
+		<li>: 
+Make essential discoveries and evidence-based suggestions to researchers, clinicians, and policymakers. The findings from this study will aid in creating policies, interventions, and educational materials that promote online safety and inclusivity for people with intellectual and developmental disabilities (IDD), specifically those with Down syndrome and other forms of general learning disability.
+		.</li>
+		<li>:
+By exploring these questions, this study hopes to improve our knowledge of how people with Down syndrome and other forms of learning disability navigate social media and help pave the way for a more welcoming and accessible online space for all.
+		.</li>
+     		
+    	</ol>
+    
+	.</p>
+	<h2>LITERATURE REVIEW</h2>
+	<h3>Introduction</h3>
+    	<p>
+The empirical review bears several significances; first, it explains the topic's background and demonstrates its importance to the field of study. Second, the empirical review lays a foundation for the current study by showing existing relationships between studies. Similarly, by reviewing previous researchers' work, the study can identify unexplored ideas and focus on them.  
+	.</p>
+	<h3>Empirical Review</h3>
+	<h4>Internet use as a 'new' technology for individuals with IDD</h4>
+	<p>
+The limited literature on Internet use by individuals with IDD shows that they consider technology extremely significant since it allows them to forge an identity and discover where they belong in social networks. A study by Molin et al. (2015), which focused on adults interviewed on different social networking sites, showed that individuals with Intellectual Disabilities (ID) used the Internet to maintain contact with their friends and parents, receive and give support, and make new friends. Many respondents from Shpigelman and Gill's (2014) research claimed that making friends through the Internet was easier, with the individuals claiming to be more comfortable making connections online than face to face. Moreover, individuals with IDD reported that the Internet offers a (cyber) space where they can elude the control of their caseworkers or parents and present more self-determination. These individuals are mobile on the Internet and create associations with whom they please, undiscovered and -seen by their caregivers and guardians. They can express their feelings and describe their activities on blogs or social media. 
+Literature shows that individuals with IDD are more inclined than their non-disabled counterparts to have a 'narrow' social media presence. According to Clement and Bigby (2009), for individuals with IDD, often, such associations are limited to other people with the same disabilities, members of the paid support staff, or family members. In Sweden, Löfgren-Mårtenson et al.'s study (2015) described teachers and parents in special programmes for young adults with ID between 18 and 20 years old as socially isolated. They also added that the Internet became an irreplaceable tool for such youths. Furthermore, students with IDD use the Internet for more than one purpose, including, but not limited to, searching and socializing with friends, chatting, and blogging (Molin et al., 2015). Similarly, these individuals also use the Internet to watch videos, listen to music, and find information. According to Shpigelman and Gill (2014), individuals with IDD believe that being part of either Facebook or Twitter aids them in 'feeling like anybody else' and acquiring a greater sense of belonging. 
+With this, Seale (2014) believed that it was possible and highly advisable to increase the activities of individuals with ID and IDD in the digital world thanks to the support of individuals around them. Such support would help these individuals through their challenges, facilitating further-reaching and broader associations. Raghavendra et al. (2013) taught adolescents with traumatic brain injuries or cerebral palsy the Internet, hoping to expand their social networks. The researchers designated individualized intervention plans founded on the interests and needs of the families and the youths on computer knowledge. Results showed a strong increase in online contacts and interpersonal communication. However, a large variation was also discovered between the participants. To begin with, 11 out of the 16 had never engaged in online communications before. Once the project ended, they all engaged in online conversations, for instance, through Skype, Facebook, or Email, with an overall average of 38 individuals. Moreover, the participants slightly decreased their loneliness scale a few months after the intervention. 
+	.</p>
+      	<h5>Enhancing technology use for individuals with IDD </h5>
+	<p>
+Throughout history, most researchers have looked into the use of AT for individuals with cognitive limitations. Most of this research is in the light of Augmentative and Alternative Communication (AAC). Nonetheless, technology on AAC has transformed from stand-alone devices to multi-million devices which can be utilized for different purposes, such as computer applications. Braddock et al. (2004) and LoPresti et al. (2008) once suggested that improving the advocacy or design for individuals with disabilities was essential to increase the number of users in special populations. Hoppestad (2013) discovered that individuals with mild-to-moderate ID could use computers once allocated the resources. This was combined with support by the firm as a whole and proper staff training which would encourage clients to use computers.  
+A study by Khanlou et al. 2021 attempted to discover barriers to accessing and using digital technology to facilitate the needs of the transition stage in employment, community integration, daily living, and even education of young adults with Developmental Disabilities (DD). The use and permitted access to digital technology exhibited and further promised positive effects on young adults' economic and social integration, facilitating their inclusion into society and supporting their autonomy. The researchers also identified various barriers, including accommodations, literacy, access to community services, the lack of it fit their needs, design, infrastructure, availability, affordability, and training. Upon applying a socio-ecological approach to interpreting the results, the researchers highlighted the significance of facilitators in promoting digital inclusion in individuals with DD and ID.
+	.</p>
+	<h4>Twitter use among individuals with IDD</h4>
+	<p>
+According to Cocq (2019), Twitter is an Internet network for receiving and sending tweets, previously identified as short messages. An individual can follow another individual and also be followed. However, mutuality is unnecessary when likened to other social networking platforms. In a tweet, an individual could address another; the platform has also made it possible to retweet a message, mainly because one might find the importance of others reading their tweet and wish to share it. According to Cocq (2019), tweets can also be classified and labeled hashtags (keyword functioning as a sorting device for users to follow). 
+A study by Griffith et al. (2012) identified manners in which social media platforms aided in sharing information with their doctors or to benefit the community. Individuals presenting rare cognitive conditions used MySpace and Twitter to grow their communities. According to the findings, social media platforms, for rare conditions, could be the only means for individuals in different geographical areas to mingle and share knowledge on their conditions. However, there were also drawbacks to sharing confidential data. Hemsley et al. (2015) conducted a study on a social media platform, Twitter, using participants who used alternative and augmented communication devices. In the two to five years of use, the researcher discovered that the participants that used such devices valued Twitter since it made them feel heard, seen, and visible.  
+In Magee (2012), the researcher aimed to test the Hierarchical Adaptive Interface Layout software in identifying the use of the response system (simple) to answer Twitter questions. For instance, respondents could give their answers on their activities or day through a pre-created question drop-down list or a smiley face chart. The modifications ensured limited mobility with an adaptive manner of posting on Twitter. Additionally, in studying how a head-tracking mouse pointer device worked for people with severely limited mobility, Magee discovered that screen adaptability was present for particular users. The researcher also discovered that when such individuals needed personal assistance to utilize social networking platforms, the above-limited communication privacy. Additionally, in such instances, personal assistants might know how to use social networking platforms but lack the interest or time to do so. 
+Apart from Twitter, a study by Seale (2013) discovered that Facebook also connected individuals with disabilities and offered community support for them. University students presenting similar disabilities claimed to use Facebook for support and their classwork. On the same, Valcourt‐Pearce (2015) made use of Facebook to document her experiences with a child born with deafness and multiple disabilities. The researcher claimed that from the onset of the austerity programme, social media networks such as Facebook and Twitter had been significant tools for disability activism in countering government policy.  
+	.</p>
+	<h4>Problems Linked to online communication in individuals with IDD</h4>
+	<p>
+Researchers investigating individuals with IDD have highlighted risky situations associated with using the Internet and social media platforms (Holmes and O'Loughlin, 2014). The researchers mentioned the clashing of a desire to be liked and establish friendship with a vulnerability to violence and exploitation, a tendency to be agreeable, and a wish to be socially desirable, which appeared normal to many individuals with disabilities. This was primarily observed in women. For instance, according to Molin et al. (2015), adults and youths with ID and IDD claimed to accept friend requests only from individuals they recognized or knew. However, the number of 'friends' on Facebook (in hundreds), together with their conflicting statements such as "I look at the photo of the individual and if he or she looks honest…") suggests otherwise. 
+A study by Holmes and O'Loughlin (2014) followed clinical vignettes to explain how the need to cultivate relationships could result in losing control. For instance, a 30-year-old woman presenting mild ID symptoms accepted any friend request on Facebook, with one of the 'friends' including a man that extracted more than $100 monthly from the woman and others that made fun of her appearance or sexually assaulted her. A similar example is given of a young woman with mild ID and autism, who understood the term 'friend' and attended parties where most individuals paid no attention to her, including her 'friends.' In Löfgren-Mårtenson's study (2008), statements from the participants showed that most of them understood the risks associated with setting up meetings or agreeing to meet on the Internet, including cyber theft. Nevertheless, the researcher hypothesized that such individuals repeated the safety measures they were taught but failed to recall that once exposed to danger. The perception of a 'friend' to individuals with IDD leads them to accept abuse and danger. Most researchers believe that the greatest danger such individuals can perceive is related to them being isolated and deprived of romantic associations. 
+Normand and Sallafranque St-Louis (2015) discovered different variables linked to the sexual cyber-solicitation of adults and youths. Findings showed that chatting, depression, loneliness, social isolation, and physical or sexual abuse, both present and past, improved the chances of facing sexual cyber-solicitation. Unfortunately, all variables apart from chatting exhibited more prevalence among individuals with autism and ID than in the overall population. As stated by Löfgren-Mårtenson et al. (2015), such vulnerability merged with the decentralized social media worries parents and caseworkers in health, social services, and school environments. The concerns of adults, parents, and caseworkers include; 1) prosecution of young individuals who fail to see serious or negative consequences of their social media statements or actions such as sexual solicitation, threats, defamation, or harassment (Löfgren-Mårtenson et al., 2015). 2) Buijs et al. (2017) listed abuse and maliciousness, including theft and violence, when communications on social media platforms lead to face-to-face meetings. 3) MacMullin et al. (2016) listed addiction or excessive Internet use. 4) cyberbullying and cyber-harassment. 5) Dodwell (2013) listed the exposure to inappropriate media content such as pornographic material. In addition, a few researchers, such as Ho et al. (2014), claimed a possible connection between different mental health disorders (anxiety, depression, and addiction) and the excessive use of the Internet. 
+Despite researchers failing to exhibit a cause-and-effect relationship, they claim that using the Internet causes problems by exacerbating different mental health issues. Still, the reverse might equally exhibit some truth; mental health issues could potentially be pushing individuals with IDD to spend most of their time online. For instance, Ybarra et al. (2015) discovered that many individuals with a disability, primarily youths who were targets of bullying, showed signs of depression while being victims. According to Helweg-Larsen et al., in 2012, between 30 to 69% of such cases, parents were unaware of the meet-ups. It can then be concluded that the increasing concern for the safety and well-being of individuals with socio-emotional and cognitive limitations spending most of their time on the Internet deserves attention. It remains definite that the desire of these individuals to see their soulmates drives their use of online dating sites and social media. Additionally, it can be claimed that individuals with IDD are generally looking for partners on the Internet to establish an offline relationship with any individual, preferably without disability.
+	.</p>
+	<h5>Training, Support, and Educational Constraints </h5>
+	<p>
+Raghavendra et al. (2018) claim that people with intellectual disabilities require much support. The need for training is dire. Most of this support is provided by the immediate families or employed staff that require essential skills in handling special needs and which they may barely be aware of. This can greatly limit IDDs from fully taking advantage of the digitization that's all over. Some caregivers even see the use of the Internet as inappropriate. Glencross et al. (2021) further opine that the lack of practical support in individuals with severe cases may limit them while using the Internet. The families that provide the care and support may not have sufficient time for the rigorous requirements and obligations, bearing in mind that they must balance with other crucial commitments in their homes. Supporting people with IDDs can be challenging for the family caregivers and those employed to look after them (Bayor et al., 2009). Parsons et al. (2008) argue that service providers may hinder the accessibility of the Internet because of organizational culture and the different attitudes of caregivers. Over time, the Internet has hindered human association and interaction because of the seclusion.
+	.</p>
+	<h5>Challenges Associated with Personal Incapability in Using the Internet </h5>
+	<p>
+Caton and Chapman (2016) argue that many people in this category may have personal limitations that render them unable to fully or even partially use the Internet. This makes accessing the Internet and many other platforms, such as Twitter, challenging since most of the operational input mechanisms include typing, which requires much physical movement; coordination may pose a challenge. This even affects their ability to read and understand (Wehmeyer et al., 2004:52). Navigating the Internet is difficult, and the execution of complicated tasks coupled with logical reasoning in a sequence is a mountain of a task. Some websites may require complex passwords and codes, and many screen elements do not help much (Simplican et al., 2019).
+Additionally, Slonje R et al. (2008) indicated that many individuals with IDD experience cyberbullying at least once a week. Around 4% to 9% reported bullying in cyberspace. There was a relatedness between cyberbullying and the intelligence quotient. This negatively impacted the esteem of such learners and the stress levels of individuals with IDDs (Raskauskas et al., 2007). Therefore, proactive measures need to be implemented to arrest this vice that threatens to destroy the fabric of individuals with intellectual and developmental disabilities. These disabilities tend to be bullied on the Internet most of the time because of their disposition.
+
+	.</p>
+	<h2>METHODS</h2>
+	<h3>Problem Analysis</h3>
+	<h4>Description of the problem</h4>
+	<p>
+Cyberspace has grown tremendously in the past decade, and so have the challenges associated with cyberspace, especially social media. People with intellectual and developmental disabilities such as Down syndrome are largely ignored in the scholarly literature in terms of the challenges they face in cyberspace, and this study seeks to fill this gap. This study aims to address the research gap concerning the cyber challenges encountered by individuals with intellectual and developmental disabilities (IDD), with a particular emphasis on those with Down syndrome and general learning disabilities. The experiences and obstacles individuals encounter within social media platforms, particularly Twitter, have not been comprehensively explored in existing academic research.
+	.</p>
+	<h4>Problem Analysis</h4>
+	<p>
+This study utilized the LDA model to predict the most common topics within the cyber challenges datasets and perform in-depth analysis. It also conducted sentiment analysis, which involved creating a labeled dataset using the Transformer learning approach –The transformers model. The model was used to train and test the labeled data. The model was applied to predict the sentiments from the collected datasets. 
+	.</p>
+	<h3>Data Collection</h3>
+	<p>
+During data collection, Twitter application programming (API) was used to search for self-identified profiles that tweeted in English. The collected profiles helped in creating the cyber challenges data sets. Keywords were used to identify individuals with an intellectual or developmental disability (IDD) and other general learning disabilities. The common keywords included IDD, Down syndrome, Williams syndrome, discrimination, and learning disability. Approximately 100 profiles were established and filtered based on common expressions to remove individuals who didn't have the disabilities mentioned above. An additional search was conducted to ascertain and verify the self-proclaimed profiles. The users were evaluated in the context of tweets, and those who met the criteria were incorporated. Upon extensive review, 39 profiles were identified to have IDD.
+A group of individuals with Down syndrome was formed for comparison. The Down syndrome dataset contained a group of randomly selected Twitter users who did not report having an ID or Williams Syndrome. The dataset had a sample size of 38 users. The sample size was achieved after excluding organization accounts and commercial users –only including users verified to have a history of IDD and Down syndrome. The final data contained the IDD data set (39 profiles) and the Down syndrome dataset (38 profiles). 
+	.</p>
+	<h3>Data Collection</h3>
+	<p>
+Text processing involves data cleaning and preparation. To preprocess the tweets, the following steps are followed: 
+	 <ol>
+        	<li>Expand the shortened version of words to their original form.</li>
+       		<li>Remove HTML tags .</li>
+       		<li>Text tokenization.</li>
+        	<li>Perform lemmatization to convert all tokens into their root wood.</li>
+		<li>Use the NLTK library to remove stopwords.</li>
+		<li>Remove special characters which add noise to the data .</li>
+		<li>Convert and standardize the accented characters into ASCII characters since tweets used in the analysis are in English.</li>
+		<li>Convert all words into lowercase.</li>
+    	</ol>
+	.</p>
+	
+	<h3>LDA Model and Topic Modelling</h3>
+	<p>
+Searching, organizing, and summarizing huge data values is a key issue in NLP. Topic modeling is often employed when the text is too large to be judiciously read and sorted manually. The approach can identify the topics present in the text or dataset. The study adopted the LDA modeling approach, which is based on the K-dimension latent random variable that obeys the distribution of Dirichlet, indicating the topic distribution of documents to generate documents. LDA is a 3-layer Bayesian approach with a parameter variable. The approach assumes that a document can be identified through the polynomial distribution of specific latent topics, and a topic can be established through the polynomial distribution of some words. In the LDA model, each latent topic is represented as a probabilistic distribution over words and the word distribution of topics that share a common Dirichlet prior. LDA models D based on three generative processes, Given a corpus D consisting of M documents, with d documents having Nd words (d∈1,..., M).
+	<ol>
+        	<li>Select a multinomial distribution ϕt for topic t(t∈{1,..., T}) from Dirichlet distribution with parameter β.</li>
+       		<li>Select the multinomial distribution θdfor document d (d∈{1,..., M}) from the Dirichlet distribution with parameter α.</li>
+       		<li>For the word wn (n∈{1,..., Nd}) in the document d:.</li>
+        	<li>Choose a topic znfrom θd.</li>
+		<li>Choose a word wnfrom ϕzn.</li>
+		
+    	</ol>
+The model is computed based on the following formula: 
+	<p> 
+According to Zhu et al. (2016), LDA is suitable in large corpus to identify and distribute latent topics. The model can establish sub-topics in documents and represent each word in the array of topic distribution. Documents are presented as a mixture of topics, where a given topic represents distribution probability over the established topics. The entries of the matrix are often word frequencies or TF-IDF scores. Appropriate interactive visualization tools help navigate the topics and gain insights into the datasets. This study used the LDA model to find the most representative topics using keywords. The word cloud was also created to help visualize the common keywords. 
+	.</p>
+	.</p>
+
+	<h3>Sentiment Labelling and Classification </h3>
+	<p>
+The posts on Twitter are highly subjective, which makes them appropriate for sentiment classification. In supervised machine learning approaches, data labeling is integral, and it is often difficult to manually verify labels on a large data set. The first step was to label the tweets for this study using Python-based libraries such as VADER and SentiWord Net. The sentiments were categorized as either positive, negative, or neutral based on the overall sentiment expressed in the tweets.
+	.</p>
+	<h3>Transformers Model </h3>
+	<p>
+Transformers model uses the attention masking approach that learns contextual relationships between words in a text. The model was based on transformers architecture, which utilized the pre-trained BERT model trained on a large-scale corpus of text (Markchom et al., 2022). The model was fine-tuned for sentiment classification on the collected Twitter datasets. The model was trained using the training data, where the input was preprocessed data, and the output was the sentiment label. It was optimized using gradient descent algorithms, specifically the Adam model. The performance of the model was evaluated based on the validation data. The evaluation metrics used include accuracy, precision score, F1-score, and recall score, which were computed to establish the model's effectiveness in predicting sentiments. The model performance was further optimized by tuning hyperparameters. The hyperparameters of the transformers model, such as the number of epochs, batch size, and learning rate, were tuned based on the grid search approach to establish the most optimal configuration that helps maximize the model's performance.
+Moreover, the model helped generate sentiment scores for each class, where the highest score represented emotional intensity. The number of tweets in each sentiment class was computed to attain the emotion frequency. The sentiment intensity and frequency between the two groups were compared between the two groups.
+	.</p>
+	<h3>Ethical considerations </h3>
+	<p>
+Several ethical and legal implications are associated with researching IDD-related data using Twitter data. Even though the study utilized the Twitter API to collect publicly available data without user consent, the Twitter privacy policy reveals that users have consented to their publicly available data being used for non-commercial research (Twitter Privacy Policy, 2023). The study observed the ethical principle of confidentiality by dropping all user names and removing personally identifiable information from the dataset.
+	.</p>
+	<h2>RESULTS, TESTING, VERIFICATION </h2>
+	<h3>Overview</h3>
+	<p>
+The analysis aimed to compare the experiences of individuals with IDD and Down syndrome. Results indicate that the groups broadly discussed topics associated with online safety, cyberbullying, and awareness. Both groups recorded high positive sentiments, with individuals with IDD having 64.9% positive expressions and those with Down syndrome having 73% positive expressions in their online interaction. However, IDD profiles exhibited increased negative experiences (16.2%) than their Down syndrome counterparts (9.1%). This suggests that IDD profiles are more likely to experience cyber challenges, such as cyberbullying, derived from the common keywords in the tweets. Even though both groups focused on advocacy and empowerment, individuals with Down syndrome discussed the issue of awareness more.
+	.</p>
+	<h3>Sentiment Classification </h3>
+	<p>
+Sentiment frequency involves how often individuals express their sentiments. The sentiments were categorized as positive, neutral, and negative. Each group's frequency was evaluated based on the number of tweets. Individuals with IDD profiles expressed significant positive sentiments (64.9%) in cyberspace. Most expressed not experiencing increased challenges in using and interacting on social networks. They reported having positive interactions online and received immense support from various individuals. The remaining segment of individuals reported neutral and negative sentiments, with 18.9% having neutral emotions and only 16.2% reporting negative interactions in the online space. This shows that despite the perceived challenges, individuals with Intellectual disability and Williams Syndrome have an overall good experience with regard to navigating and interacting in online spaces such as Twitter. They noted to have experienced reduced possibilities of cyberbullying. Compared to individuals with Down syndrome, individuals with ID and Williams Syndrome recorded a higher average of cyber challenges. Down syndrome profiles had an increased frequency of positive sentiment scores (73%) in social media. They faced reduced negative emotions associated with cyber difficulties on Twitter. A few participants recorded 18.9% neutral expressions and 9.1% negative expressions on social media. In sum, the emotions expressed significantly differed between users with ID and those with Down syndrome.
+	.</p>
+	<h3>Topic Modelling  </h3>
+	<p>
+The LDA model and word cloud were utilized to identify the common topics in the datasets. The word cloud produced the top 50 prevalent words in both datasets. The topics were derived from the clusters of top keywords in the control group and IDD dataset. Clusters represent topics users are likely to discuss and whether there might be correlations and differences between the obtained topics. We manually clustered the top 50 keywords in each group, resulting in two topics, as shown below, and revealing significant differences between the IDD and non-IDD datasets. The two topics are aggression and toxicity and bullying.
+ <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+<table>
+        <tr>
+            <th>Topic</th>
+            <th>Description</th>
+            <th>Keywords used to search </th>
+        </tr>
+        <tr>
+            <td>Cyberbullying and Online Safety</td>
+            <td>
+Bullying involves aggressive behaviour that centers on intentional and repeated mistreatment of another person intending to harm, intimidate or cause distress. Individuals online might struggle with adverse harassment effects, which has prompted prevention efforts to deter cyber challenges and improve online safety.
+	   </td>
+            <td>Prevents, struggles, challenges, shame, and repeat </td>
+        </tr>
+        <tr>
+            <td>Awareness</td>
+            <td>
+Awareness involves having knowledge, understanding, or being conscious about a particular aspect, subject, or situation. In the online space, it encompasses being conscious and well-informed regarding the potential risks, opportunities, and challenges while interacting on social networks.
+	   </td>
+            <td>Awareness, importance, mental, disability, mental, BBC news, and learning</td>
+        </tr>
+    </table>
+
+	.</p>
+  <h4>Common keywords in the dataset</h4>
+ <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+    
+    <table>
+        <tr>
+	    <th></th>
+            <th>ID dataset</th>
+            <th>Down syndrome dataset</th>
+            
+        </tr>
+        <tr>
+	    <td>1</td>
+            <td>Disability</td>
+            <td>Disability</td>
+        </tr>
+        <tr>
+	    <td>2</td>
+            <td>Syndrome</td>
+            <td>Understand </td>
+        </tr>
+	<tr>
+	    <td>3</td>
+            <td>Mentally </td>
+            <td>National</td>
+         
+        </tr>
+ 	<tr>
+            <td>4</td>
+            <td>Intellectual</td>
+            <td>Bbc news</td>
+        </tr>
+	<tr>
+            <td>5</td>
+            <td>Struggled</td>
+            <td>Awareness </td>
+        </tr>
+	<tr>
+            <td>6</td>
+            <td>Williams</td>
+            <td>Trump</td>
+        </tr>
+	<tr>
+            <td>7</td>
+            <td>Learning</td>
+            <td>Great</td>
+        </tr>
+	<tr>
+            <td>8</td>
+            <td>Challenged</td>
+            <td>Happy</td>
+        </tr>
+	<tr>
+            <td>9</td>
+            <td>Shame</td>
+            <td>pride</td>
+        </tr>
+	<tr>
+            <td>10</td>
+            <td>Health </td>
+            <td>Talking</td>
+        </tr>	
+  
+    </table>
+	<p>
+From inspection of the commonly identified words, it is clear that individuals with ID recorded high bullying and online safety-related cases in cyberspace compared to individuals with Down syndrome (see Figures 4 and 5). The Down syndrome dataset exhibited more awareness-related keywords than the IDD dataset. This suggests possible differences in how individuals with different conditions interact on social platforms.
+	.</p>
+	<h3>Topic1: Bullying and Online Safety </h3>
+	<p>
+Individuals use online platforms to harass, intimidate or harm others. This can be through sending threatening messages, posting offensive content, or spreading rumours. Individuals with IDD and Down syndrome can experience difficulties processing information, communicating, and navigating social environments, exposing them to increased vulnerabilities related to online harassment. They struggle and experience difficulties understanding nuances and social cues and thus might misinterpret online interactions, resulting in increased misunderstandings and vulnerabilities to cyberbullying. Some tweets indicated that many users experienced some form of bullying. Words like Prevents, struggled, challenged, shame, and repeate described the experience of most IDD users. 
+Users with ID and Williams syndrome discussed issues of learning difficulties more than users who reported having Down syndrome based on their profile description. Typical issues discussed revolved around struggles, challenges, shame, and learning difficulties while interacting on social platforms. In comparison, the Down syndrome group focused more on positive things, which largely centred on awareness, understanding, pride, and happiness. The group focused on aspects of online safety by discussing issues that promote inclusivity to help protect individuals with learning disabilities from cyberbullying. The word list associated with the group is shown in Figure 4 in Appendix 1.
+	.</p>
+	<h3>Topic 2: Awareness</h3>
+	<p>
+Individuals with learning disabilities are increasingly using the Internet; however, they have been vulnerable to being victimized online. Increasing public awareness among these individuals of cyber security is critical in deterring cybercrime to some level. Upon inspection of a cluster of words (see Figure 5) associated with awareness, it was observed that individuals with Down syndrome discussed topics related to awareness more than those with Williams syndrome and other Intellectual disabilities. They primarily focused on mental health support and self-advocacy. The profiles shared posts to raise awareness regarding the potential effects of online interactions on the mental health of people with learning disabilities. This can promote early identification and intervention for those experiencing the challenges. Several tweets showed how these individuals advocate for their rights and express their experiences in online spaces. From the output, it is clear that individuals with IDD exhibit significantly high and similar emotions to the Down syndrome group in promoting awareness about learning disabilities. Tweets, as shown below, reveal issues reported, and the profiles strive to raise awareness:
+	.</p>
+	…whos counting down the days to the national do...
+	<p>…i just signed up for national down syndrome co... .</P>
+	<p>
+The common keywords in the datasets related to raising awareness in cyberspace include BBC News, national, understand, happy, health, learning, mental, intellectual, disability, and awareness
+	.</p>
+	<h3>Model Performance and Metric Comparison </h3>
+	<p>The performance of the transformers model was evaluated on three key metrics: Precision score, F1-score, and recall..</p>
+<h4>Table 3: Metrics Comparsion</h4>
+    
+    <table>
+        <tr>
+            <th>Class</th>
+            <th>Precision-Model IDD</th>
+            <th>Recall-Model IDD</th>
+ 	    <th>F1-score-Model IDD</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>0.0</td>
+	    <td>0.0</td>
+	    <td>0.0</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>87.5</td>
+            <td>100</td>
+ 	    <td>93.3333 </td>
+	<tr>
+            <th></th>
+            <th>Precision-Model Down-Syndrome</th>
+            <th>Recall-Model Down-Syndrome</th>
+ 	    <th>F1-score-Model Down-Syndrome</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>0.000000</td>
+	    <td>0.000000</td>
+	    <td>0.000000</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>50</td>
+            <td>100</td>
+ 	    <td>66.6667</td>
+	<p> 
+
+        </tr>
+    </table>
+	<p>
+Precision-measured the accuracy of positive predictions by evaluating the ratio of true positives to the total number of positive predictions (true positives + false positives). It focuses on the correctness of the model to predict instances without including false positives. A high precision score suggests a low rate of false positives. From the table above, the model recorded 0 % and 87.5 % precision scores for the sentiments in the IDD dataset. This implies that high rate of false positives in the IDD dataset. Contrastingly, for the Down syndrome group, the model recorded 0% and 50% precision scores for the sentiments (negative, positive). The precision score for a positive class label is 50%, which suggests that true positives are average. Recall value evaluates the ability of the model to predict positive instances correctly. It emphasizes the ability of the model to avoid false negatives, revealing that a high recall score implies a lower rate of false negatives. For the IDD dataset, the recall values are 0% and 100% for sentiments (negative and positive). This model correctly identifies instances of positive labels but struggles to capture most of the negative ones. 
+	.</p>
+	<p>
+The model recorded 0.0% and 100% recall scores for the Down-Syndrome dataset. This shows that, for the control group, the model correctly identifies positive instances but struggles to identify negative sentiments. Finally, the F1 score measures the model's accuracy by balancing the recall and precision scores. It provides a general evaluation of the model performance by considering the false positives and negatives. A higher F1 score suggests a better trade-off between recall and precision. The IDD model yielded 0.0% and 93.333% F1-scores for the sentiments. This indicates that the model is effective in predicting positive sentiments but less effective in identifying negative sentiments. For the Down-Syndrome dataset, the F1 scores attained were 0%, and 66.6667%, revealing that the model struggles to identify negative but performs better in identifying positive sentiments. 
+	.</p>
+	<h2>DISCUSSION</h2>
+	<P>
+The study investigated the difficulties individuals with forms of intellectual and developmental disabilities (IDD) encounter when using social media platforms. Through this study, the researcher also aimed to understand the complexities of online safety and cybersecurity issues these individuals face while using Twitter. The findings of this study make significant contributions to the vast literature on assessing how different factors might protect against the psychological adjustment difficulties relating to cyber-security and -victimization. Moreover, the findings also underscore the significance of researchers focusing more on the cyber experiences of individuals with IDD. 
+	</P>
+	<P>
+Findings from the study showed significant similarities between Twitter users with Down Syndrome and Learning Disabilities in social interactions and behavioral tendencies. For instance, groups with Down Syndrome and Learning Disabilities discussed topics associated with awareness, cyberbullying, and online safety. However, users with Learning Disabilities discussed issues of learning difficulties more than users with Down syndrome, based on their profile description. Typical issues discussed revolved around struggles, challenges, shame, and learning difficulties while interacting on social platforms. Similarly, the two groups recorded high positive sentiments, with individuals with IDD recording 64.9% positive expressions and those with Down syndrome having 73% positive expressions in their online interactions. Literature showed that individuals with IDD frequently described difficulties with rest, focus, and organization. This is also supported by Morisse et al. (2013), who claimed that the field of IDD is strongly influenced by the Quality of Life (QOL) paradigm, where, through this framework, the researchers identified feelings of unrest and lack of focus in individuals with ID. Like this study, the framework strongly supports the equality of these individuals, which reflects in various concepts (empowerment, inclusion, emancipation, and self-determination).  
+	.</P>
+	<P>
+Literature disclosed that individuals with IDD often lack peer friendships, especially after adult work and school hours for adolescents and youths. Therefore, this study's findings also help understand the emotional trajectories and unique perspectives of individuals with IDD who use social media platforms. According to the study's sentiment analysis, Learning Disabilities profiles exhibited increased negative experiences (16.2%) than their Down syndrome counterparts (9.1%). Burrel et al. (2017) affirmed that frustrations were often reported on such individuals, especially during conflicts over inflexibility or repetitive behaviors. Respondents in Burrel et al.'s study claimed that anger and frustrations came from a combined desire to transform their situations together with a sense of hopelessness. However, most respondents reported that realizing their relatives with Learning Disabilities could not change their situation; they opted to change their perception of it, which appeared essential. 
+	.</P>
+	<P>
+A definition by The American Association of Intellectual and Developmental Disabilities (AAIDD) (2010) on intellectual disability highlights limitations in adaptive behaviour and intellectual functioning, expressed in practical, social, and conceptual adaptive skills. However, the AAIDD stressed that the limitation in such individuals co-exists with a particular type of strength and that the level of life functioning in individuals with IDD improves once appropriately personalized support is provided over a sustained period. This coincides with the current study's findings as the results also stress the need for support systems and tailoring interventions to the unique requirements of individuals with Down Syndrome and various forms of Learning Disabilities. Literature has shown that individuals with ID have difficulties using technology, especially computer interfaces. Nevertheless, most individuals with IDD declare that they use social media accounts with no assistance, implying that individuals with ID with cognitive disabilities participate in social networking sites and surf the Internet, as similarly discovered by Shpigelman and Gill (2014). At the same time, participants stated that they also faced challenges when using social media platforms, in this case, Twitter. 
+	.</P>
+	<P>
+Findings also showed differences; for instance, Learning Disabilities profiles had more negative experiences when using the Twitter platform than individuals with Down Syndrome. This suggests that individuals with Learning Disabilities are likelier to experience cyber challenges like cyberbullying. Users with Learning Disabilities were also identified to discuss issues relating to learning difficulties than their counterparts with Down Syndrome. Comparatively, individuals with Down Syndrome focused more on positive things than their counterparts largely centred on awareness, understanding, pride, and happiness. The group focused on aspects of online safety by discussing issues that promoted inclusivity to help protect individuals with learning disabilities from cyberbullying.
+	 .</P>
+	<P>
+Empirical foundations were identified in various studies, such as one by Magee (2012), who aimed to identify the use of the response system (simple) to answer Twitter questions in individuals with IDD, and Hemsley et al. (2015), who carried out a study on Twitter on individuals with intellectual disabilities that used augmented and alternative devices of communication. The current study categorized the participants' sentiments as positive, neutral, and negative. In the two groups, the frequency was elevated based on the number of tweets. According to the findings, profiles of individuals with Learning Disabilities showed significant negative emotions in cyberspace. A large number of these individuals reported instances of bullying. This supported the findings of Ybarra et al. (2015), who also discovered that many individuals with a disability, primarily youths, were targets of bullying and later exhibited signs of depression. Cyberbullying and cyber-harassment were also mentioned in Löfgren-Mårtenson et al.'s (2015) study.
+	 .</P>
+	<P>
+Numerous studies -such as one by Holmes and O'Loughlin (2014)- that have investigated individuals with IDD highlight risky situations linked to Internet use, particularly social media platforms. It was identified that different factors led individuals with disabilities to social media interactions, and they included; a clashing desire to be liked, the desire to establish a friendship which often led to a vulnerability to exploitation and violence, a wish to be socially desirable, and a certain tendency to be agreeable. All this appeared normal to individuals with IDD. Molin et al.'s (2015) study also supports this, where participants (youths and adults) claimed to accept online requests only from individuals they were familiar with. However, the researchers discovered conflicting evidence as the number of followers on social media platforms and the statements came from strangers, often perceived by individuals with IDD as 'he or she looks honest.' When likened to individuals without IDD, participants (group of individuals with IDD) recorded higher averages of cyber challenges, including toxicity and cyber-bullying. This also coincides with the findings of Holmes and O'Loughlin (2014), who discovered that individuals with IDD were exposed to toxicity and cyber-bullying because of their desire to cultivate relationships which could potentially lead to a loss of control. 
+	.</P>
+	<P>
+Unlike individuals with IDD, non-IDD individuals faced reduced adverse effects of cyberbullying, toxicity, and aggression. Holmes and O'Loughlin (2014) believed this was possible because non-IDD individuals did not always perceive that most were "friends, " so they were less exposed to danger and abuse. Existing literature also highlighted that the greatest danger individuals with IDD are most likely to face or perceive relates to them being isolated or deprived of relationships, including romantic ones. Individuals with Learning Disabilities are increasingly using the Internet; however, they have been vulnerable to being victimized online. Increasing public awareness among these individuals of cyber security is critical in deterring cybercrime to some level.
+	.</P>
+	<P>
+The participants also reported an increasing amount of awareness. Upon inspection of a cluster of words associated with awareness, results showed that individuals with Down Syndrome discussed topics related to awareness more than those with Learning Disabilities. The group focused on mental health support and self-advocacy. Individuals with Down Syndrome shared more posts on raising awareness by focusing on the potential effects of online interactions on the mental health of individuals with Learning Disabilities. This will likely promote early identification and intervention for individuals experiencing cybersecurity challenges. The study also showed that individuals with Learning Disabilities exhibit significantly high and similar emotions to their counterparts with Down Syndrome in promoting awareness of cyber challenges and IDD and Learning Disabilities. 
+	.</P>
+	<P>
+Overall, the findings of this study support researchers who claim that using the Internet causes problems, only differing where researchers claim that such issues exacerbate mental health issues. It is also wise to entertain the thought that the reverse might be true; mental health issues could, perhaps, be pushing individuals to spend most of their time on social media platforms. To sum it up, this study's findings identified that the expressed emotions significantly differed between users with IDD and those without IDD. It can then be concluded that the increasing concern for the safety and well-being of individuals with socio-emotional and cognitive limitations spending most of their time on the Internet deserves attention. 
+	.</P>
+	<h3>Implications</h3>
+	<p>
+Implications for advocacy and public awareness of the cyber problems faced by people with Down syndrome and Learning Disabilities are significant due to this study. As the findings of this study make their way into the mainstream, caregivers, educators, politicians, and the general public will have a deeper appreciation for the specific challenges and hazards experienced by people with intellectual and developmental disabilities when navigating the Internet. The findings of this research can be used to improve the digital inclusion of persons with intellectual and developmental disabilities (IDD) through revised policies, curricula, and interventions. Guidelines, treatments, and instructional materials can be created to enhance the digital experiences of persons with Down syndrome and general learning difficulties and to keep them safe online by addressing the identified cyber hurdles and risks. Moreover, this research aims to enable persons with intellectual and developmental disabilities to participate fully in online communities. Platforms, interfaces, and technologies that are accessible and tailored for people with IDD can be developed after their unique needs are understood. If this happens, people with Down syndrome and other learning difficulties may feel more included in society and more empowered in the digital world.
+	.</p>
+	<p>
+The results of this study can contribute to the overall effort to make the Internet a safer, more inclusive place for persons with intellectual and developmental impairments. This research aims to provide evidence-based suggestions and guidelines for professionals, policymakers, and organizations working on disability rights and digital inclusion by analyzing the cyber obstacles experienced by persons with intellectual and developmental disabilities. The results can be generalized to others with intellectual and developmental disabilities, not just those with Down syndrome or learning problems like the study's subjects. This research delves deeper into the interaction of neurodevelopmental disorders and cyber issues, expanding our understanding of the digital experiences and needs of persons with IDD.
+	.</p>
+	<p>
+Many governments have policies and legislation promoting inclusion, but such laws are mostly on paper (Venkatasubramanian, 2008). The governments of the day are not proactive enough to ensure that people with intellectual and development activities benefit from such policies. Not much has been done to availInternet and other platforms to IDDs and the change in attitude by society. Alhaboby et al. (2017) consider that many programs' universal outlooks may not be friendly. There is a need for special programs and specialized designs to meet the needs of special users. The governments may have the will but lack the appropriate strategies to include people with IDs (Normand and Sallafranque, 2016). Most programs and products available on media platforms are usable by all and are not specifically tailored for special needs. Although there are legal ramifications, not much has been done to promote compliance and even implement the penalties that have been wanting.
+
+	.</p>
+	<h2>SUMMARY, CONCLUSION, EVALUATION</h2>
+	<p>
+The study compares the experiences of individuals with IDD and Down syndrome on online platforms. Results indicate that the groups broadly discussed topics associated with online safety, cyberbullying, and awareness. Both groups recorded high positive sentiments, with individuals with IDD having 64.9% positive expressions and those with Down syndrome having 73% positive expressions in their online interactions. However, IDD profiles exhibited increased negative experiences (16.2%) than their Down syndrome counterparts (9.1%). This suggests that IDD profiles are more likely to experience cyber challenges, such as cyberbullying, derived from the common keywords in the tweets. Even though both groups focused on advocacy and empowerment, individuals with Down syndrome discussed the issue of awareness more.
+	.</p>
+	<p>
+Previous research indicated that individuals establish social identity by interacting with other individuals. Adding to face-to-face interactions, social identity has also been identified to be formed online and especially on social networking sites such as Twitter. It remained definite that the desires of individuals with IDD to see remain socially desirable, accompanied by a clashing desire to be liked, drove their use of social networking sites. In addition, it can be concluded that these individuals are generally looking for a 'friend,' and to some extent, soulmate to establish an offline association with an individual, most preferably without disability.  
+	.</p>
+	<p>
+There are potentially numerous risks on social media networks. However, it is also wise to highlight the benefits for individuals with IDD. For instance, social media platforms offer users an opportunity to expand their social circle and maintain regular contact. Like other individuals, social networking sites also offer individuals with IDD a chance to make their opinions and thoughts known, likely making them feel like they have control over them. Therefore, as studies highlight the downsides of cyberspaces to individuals with IDD, it remains crucial to get the balance right, offering the same freedom and rights while ensuring they are empowered to deal with difficulties experienced on social media platforms. 
+	.</p>
+	<p>
+Transdisciplinary and inclusive action and research are also needed to assess and describe the effectiveness of caregiver practices in protecting individuals with IDD against cyber challenges. It is also important to emphasize that these caregivers are not the sole entities responsible for ensuring safe internet use for these individuals.
+.</p>
+	<p>
+The current research has shed light on the unique behavioral patterns and social interactions of Twitter users diagnosed with Down syndrome and general learning disabilities such as William syndrome, learning disability (UK), and intellectual disability (USA). The results of this investigation underscore the significance of utilizing Twitter as a means of monitoring and analyzing individuals afflicted with these ailments, furnishing valuable perspectives that may be employed to enhance medical assistance, diagnostic standards, and mechanisms for the automated identification of associated impairments. By analyzing data and insights from social media platforms such as Twitter, scholars, psychiatrists, and medical practitioners can better understand the challenges faced by individuals with Down syndrome and general learning disabilities. This will enable the formulation of more precise interventions to enhance the mental well-being of said individuals. Despite the limitations of this study, further investigation into the intricate interplay between individuals with disabilities and social media across diverse online platforms is warranted. Social media platforms such as Twitter offer a distinctive avenue for enhancing our comprehension of Down syndrome, learning disabilities, and associated disorders. This, in turn, can enhance the digital well-being and inclusivity of individuals affected by these conditions.
+	.</p>
+	<p>
+There were significant differences between Twitter users with Down syndrome and general learning disabilities and the control group regarding behavioral tendencies and social interactions. People with intellectual and developmental disabilities frequently described difficulties with focus, organization, and rest. In contrast, members of the control group, or non-IDD group, discussed these issues less frequently. Sentiment analysis revealed that compared to a control group, people with IDD showed lower levels of excitement, empathy, and curiosity and higher levels of perplexity and frustration. Furthermore, people with IDD showed increased affective reactivity, manifested in elevated anxiety, sadness, disorientation, anger, and joy. People with IDD, as shown by word clouds and polarity detection in sentiment analysis, generally showed negative and neutral sentiments, while the non-IDD group showed more positive and neutral sentiments.
+	.</p>
+	<p>
+The findings of this study are significant because they facilitate the comprehension of the unique perspectives and emotional trajectories of people with IDD who use social media. The findings stress the need for tailoring interventions and support systems to the unique requirements of people with Down syndrome and other forms of general learning disability. Some caveats to this study must be taken into account. The data may be skewed or inaccurate because the study relied on self-reported conditions. A more accurate picture of people's IDD status could be gleaned from future studies if they incorporated objective measures like diagnostic evaluations and medical records. In addition, Twitter was the only social media site examined in this study. Future research could benefit from a more comprehensive understanding of how people with IDD use various forms of digital media if additional social media sites were included in the analysis.
+	.</p>
+	<h2>BIBLIOGRAPHY</h2>
+	<ol>
+		<li>
+Adolfsson, P., Lindstedt, H. and Janeslätt, G., 2015. How people with cognitive disabilities experience electronic planning devices. NeuroRehabilitation, 37(3), pp.379-392.
+		.</li>	
+		<li>
+Alhaboby, Z.A., Barnes, J., Evans, H. and Short, E. (2019). Cyber-victimization of people with chronic conditions and disabilities: a systematic review of scope and impact. Trauma, Violence, & Abuse, 20(3), pp.398-415.
+ 		.</li>
+		<li>
+Alhaboby, Z.A., Barnes, J., Evans, H. and Short, E., (2017). Challenges facing online research: Experiences from research concerning cyber-victimization of people with disabilities.
+		.</li>
+		<li>
+American Association of Intellectual and Developmental Disabilities. 2010. Intellectual Disability: Definition, Classification, and Systems of Supports. 11th ed. 
+		.</li>
+		<li>Angelov, D. (2020). Top2vec: Distributed representations of topics. arXiv preprint arXiv:2008.09470..</li>
+		<li>
+Bayor, A., Bircanin, F., Sitbon, L., Ploderer, B., Koplick, S. and Brereton, M, December (2009). Characterizing participation across social media sites amongst young adults with intellectual disability. In Proceedings of the 30th Australian Conference on Computer-Human Interaction (pp. 113-122). .</li>	
+		<li>Beyer, S. and Perry, J., 2013. Promoting independence through the use of assistive technology. Tizard learning disability review, 18(4), pp.179-185..</li>
+		<li>
+Braddock, D., Rizzolo, M.C., Thompson, M. and Bell, R., 2004. Emerging technologies and cognitive disability. Journal of Special Education Technology, 19(4), pp.49-56.
+		.</li>
+		<li>
+Buijs, P.C., Boot, E., Shugar, A., Fung, W.L.A. and Bassett, A.S., 2017. Internet safety issues for adolescents and adults with intellectual disabilities. Journal of Applied Research in Intellectual Disabilities, 30(2), pp.416-418.
+		.</li>
+		<li>
+Burrell, A., Ives, J. and Unwin, G., 2017. The experiences of fathers who have offspring with an autism spectrum disorder. Journal of autism and developmental disorders, 47, pp.1135-1147.
+		.</li>
+		<li>
+Caton, S. and Chapman, M. (2016). The use of social media and people with intellectual disability: A systematic review and thematic analysis. Journal of Intellectual and developmental disability, 41(2), pp.125-139. 
+		.</li>
+		<li>
+Caton, S. and Chapman, M., 2016. The use of social media and people with intellectual disability: A systematic review and thematic analysis. Journal of Intellectual and developmental disability, 41(2), pp.125-139.
+		.</li>
+		<li>
+Chadwick, D., Wesson, C. and Fullwood, C., (2013). Internet access by people with intellectual disabilities: Inequalities and opportunities. FutureInternet, 5(3), pp.376-397. 
+		.</li>
+		<li>
+Chadwick, D.D., Quinn, S. and Fullwood, C., 2017. Perceptions of the risks and benefits of Internet access and use by people with intellectual disabilities. British Journal of Learning Disabilities, 45(1), pp.21-31.
+		.</li>
+		<li>
+Clement, T. and Bigby, C., 2009. Breaking out of a distinct social space: Reflections on supporting community participation for people with severe and profound intellectual disability. Journal of Applied Research in Intellectual Disabilities, 22(3), pp.264-275.
+		.</li>
+		<li>Cocq, C., 2019. Negotiating Authority: Disability, Interactions and Power Relations on Twitter. .</li>
+		<li>
+Didden, R., Scholte, R.H., Korzilius, H., De Moor, J.M., Vermeulen, A., O’Reilly, M., Lang, R. and Lancioni, G.E., (2009). Cyberbullying among students with an intellectual and developmental disability in special education settings. Developmental neurorehabilitation, 12(3), pp.146-151.11(1).
+		.</li>
+		<li>
+Dowdell, E.B., 2013. Use of the Internet by parents of middle school students: Internet rules, risky behaviours, and online concerns. Journal of Psychiatric and Mental Health Nursing, 20(1), pp.9-16.
+		.</li>
+		<li>
+Durkin, K. and Conti-Ramsden, G., 2014. Turn off or tune in? What advice can SLTs, educational psychologists, and teachers provide about the uses of new media and children with language impairments? Child Language Teaching and Therapy, 30(2), pp.187-205.
+From Practice. 
+		.</li>
+		<li>
+Furnell, S., Helkala, K. and Woods, N., 2021, July. Disadvantaged by disability: examining the accessibility of cyber security. In Universal Access in Human-Computer Interaction. Design Methods and User Experience: 15th International Conference, UAHCI 2021, Held as Part of the 23rd HCI International Conference, HCII 2021, Virtual Event, July 24–29, 2021, Proceedings, Part I (pp. 197-212). Cham: Springer International Publishing.
+		.</li>
+		<li>
+García-Galera, M.-C., Del-Hoyo-Hurtado, M., & Fernández-Muñoz, C. (2014). Engaged youth in the Internet. The role of social networks in social active participation. Comunicar, 22(43), 35-43
+		.</li>
+
+		<li>
+García-Galera, M.-C., Del-Hoyo-Hurtado, M., & Fernández-Muñoz, C. (2014). Engaged youth in the Internet. The role of social networks in social active participation. Comunicar, 22(43), 35-43
+		.</li>	
+		<li>Gillespie, A., Best, C. and O'Neill, B., 2012. Cognitive function and assistive technology for cognition: a systematic review. Journal of the International Neuropsychological Society, 18(1), pp.1-19..</li>	
+		<li>Gjermestad, A., 2017. Narrative competence in caring encounters with persons with profound intellectual and multiple disabilities. International Practice Development Journal, 7. .</li>	
+		<li>Glencross, S., Mason, J., Katsikitis, M. and Greenwood, K.M. (2021). Internet use by people with intellectual disability: Exploring digital inequality—A systematic review. Cyberpsychology, Behavior, and Social Networking, 24(8), pp.503-520. .</li>	
+		<li>Grace, E., Raghavendra, P., Newman, L., Wood, D. and Connell, T., 2014. Learning to use the Internet and online social media: What is the effectiveness of home-based intervention for youth with complex communication needs? Child Language Teaching and Therapy, 30(2), pp.141-157. .</li>	
+		<li>Griffiths, F., Cave, J., Boardman, F., Ren, J., Pawlikowska, T., Ball, R., Clarke, A. and Cohen, A., 2012. Social networks–the future for health care delivery. Social science & medicine, 75(12), pp.2233-2241. .</li>	
+		<li>Helweg‐Larsen, K., Schütt, N. and Larsen, H.B., 2012. Predictors and protective factors for adolescent Internet victimization: Results from a 2008 nationwide Danish youth survey. Acta paediatrica, 101(5), pp.533-539. .</li>	
+		<li>Hemsley, B., Dann, S., Palmer, S., Allan, M. and Balandin, S., 2015. "We definitely need an audience": experiences of Twitter, Twitter networks, and tweet content in adults with severe communication disabilities who use augmentative and alternative communication (AAC). Disability and Rehabilitation, 37(17), pp.1531-1542..</li>	
+		<li>Ho, R.C., Zhang, M.W., Tsang, T.Y., Toh, A.H., Pan, F., Lu, Y., Cheng, C., Yip, P.S., Lam, L.T., Lai, C.M. and Watanabe, H., 2014. The association between internet addiction and psychiatric co-morbidity: a meta-analysis. BMC Psychiatry, 14(1), pp.1-10..</li>
+		<li>Holmes, K.M. and O'Loughlin, N., 2014. The experiences of people with learning disabilities on social networking sites. British Journal of Learning Disabilities, 42(1), pp.1-5..</li>
+		<li>Hoppestad, B.S., 2013. Current perspective regarding adults with intellectual and developmental disabilities accessing computer technology. Disability and Rehabilitation: Assistive Technology, 8(3), pp.190-194..</li>
+		<li>Internet World Stats (2016). World Internet usage and population statistics June 30, 2016 - update. Retrieved from http://www.internetworldstats.com/stats.htm .</li>
+		<li>Khanlou, N., Khan, A., Vazquez, L.M. and Zangeneh, M., 2021. Digital literacy, access to technology, and inclusion for young adults with developmental disabilities. Journal of Developmental and Physical Disabilities, 33, pp.1-25. .</li>
+		<li>Kowalski, R.M. and Fedina, C., (2011). Cyberbullying in ADHD and Asperger Syndrome populations. Research in Autism Spectrum Disorders, 5(3), pp.1201-1208..</li>
+		<li>Le, Q., & Mikolov, T. (2014, June). Distributed representations of sentences and documents. In International conference on machine learning (pp. 1188-1196). PMLR..</li>
+		<li>Linell, P., 2009. Rethinking language, mind, and world dialogically. IAP..</li>
+		<li>.</li>
+		<li>.</li>
+		Löfgren-Mårtenson, L., (2008). Love in cyberspace: Swedish young people with intellectual disabilities and the Internet. Scandinavian Journal of Disability Research, 10(2), pp.125-138<li>.</li>
+		<li>Löfgren-Mårtenson, L., Sorbring, E. and Molin, M., 2015. "T@ngled up in blue": Views of parents and professionals on internet use for sexual purposes among young people with intellectual disabilities. Sexuality and Disability, 33, pp.533-544. .</li>
+		<li>LoPresti, E.F., Bodine, C. and Lewis, C., 2008. Assistive technology for cognition [Understanding the Needs of Persons with Disabilities]. IEEE Engineering in Medicine and Biology Magazine, 27(2), pp.29-39..</li>
+		<li>Dupont, M.È., Roux, J., Pépin-Beauchesne, L. and Bilodeau, P., 2017. Bridging the digital divide for people with intellectual disability. Cyberpsychology: Journal of Psychosocial Research on Cyberspace, 11(1)..</li>
+		<li>MacMullin, J.A., Lunsky, Y. and Weiss, J.A., 2016. Plugged in: Electronics use in youth and young adults with autism spectrum disorder. Autism, 20(1), pp.45-54..</li>
+		<li>Magee IV, J.J., 2012. Adaptable interfaces for people with motion disabilities. Boston University..</li>
+		<li>Maiano, C., Aime, A., Salvas, M.C., Morin, A.J. and Normand, C.L., 2016. Prevalence and correlates of bullying perpetration and victimization among school-aged youth with intellectual disabilities: A systematic review. Research in developmental disabilities, 49, pp.181-195.</li>
+		<li>Markchom, T., Liang, H., & Chen, J. (2022, July). UoR-NCL at SemEval-2022 Task 3: Fine-Tuning the BERT-Based Models for Validating Taxonomic Relations. In Proceedings of the 16th International Workshop on Semantic Evaluation (SemEval-2022) (pp. 260-265)..</li>
+		<li>Markchom, T., Liang, H., & Chen, J. (2022, July). UoR-NCL at SemEval-2022 Task 3: Fine-Tuning the BERT-Based Models for Validating Taxonomic Relations. In Proceedings of the 16th International Workshop on Semantic Evaluation (SemEval-2022) (pp. 260-265)..</li>
+		<li>Mead G.M. (1925) The genesis of the self and social control. Int J Ethics, 35: 251–77..</li>
+		<li>Molin, M., Sorbring, E. and Löfgren-Mårtenson, L., 2015. Teachers' and parents' views on the Internet and social media usage by pupils with intellectual disabilities. Journal of Intellectual Disabilities, 19(1), pp.22-33..</li>
+		<li>Morisse, F., Vandemaele, E., Claes, C., Claes, L. and Vandevelde, S., 2013. Quality of life in persons with intellectual disabilities and mental health problems: An explorative study. The Scientific World Journal, 2013. .</li>
+		<liNormand, C.L. and Sallafranque‐St‐Louis, F., (2016) Cyber victimization of young people with an intellectual or developmental disability: Risks specific to the sexual solicitation. Journal of Applied Research in Intellectual Disabilities, 29(2), pp.99-110.li>	
+		<li>Raghavendra, P., Hutchinson, C., Grace, E., Wood, D., and Newman, L. (2018). "I like talking to people on the computer": Outcomes of a home-based intervention to develop social media skills in youth with disabilities living in rural communities. Research in developmental disabilities, 76, pp.110-123..</li>
+		<li>Raghavendra, P., Newman, L., Grace, E. and Wood, D., 2013. 'I could never do that before': effectiveness of a tailored Internet support intervention to increase the social participation of youth with disabilities. Child: care, health and Development, 39(4), pp.552-561. .</li>
+		<li>Ramsten, C., Martin, L., Dag, M. and Hammar, L.M., 2020. Information and communication technology use in daily life among young adults with mild-to-moderate intellectual disability. Journal of Intellectual Disabilities, 24(3), pp.289-308. .</li>
+		<li> Raskauskas, J. and Stoltz, A.D., (2007). Involvement in traditional and electronic bullying among adolescents. Developmental psychology, 43(3), p.564..</li>
+		<li>Seale, J. and Chadwick, D. (2017). How does risk mediate the ability of adolescents and adults with intellectual and developmental disabilities to live a normal life by using the Internet? Cyberpsychology: Journal of Psychosocial Research on Cyberspace,.</li>
+		<li>Seale, J., (2014). The role of supporters in facilitating the use of technologies by adolescents and adults with learning disabilities: a place for positive risk-taking? European Journal of Special Needs Education, 29(2), pp.220-236. .</li>
+		<li>Seale, J., 2013. When digital capital is not enough: reconsidering the digital lives of disabled university students. Learning, Media and Technology, 38(3), pp.256-269. .</li>
+		<li>Shpigelman, C.N. and Gill, C.J., 2014. How do adults with intellectual disabilities use Facebook? Disability & Society, 29(10), pp.1601-1616. .</li>
+		<li>Simplican, S.C., Leader, G., Kosciulek, J. and Leahy, M., (2015). Defining social inclusion of people with intellectual and developmental disabilities: An ecological model of social networks and community participation. Research in developmental disabilities, 38, pp.18-29. .</li>
+		<li> Slonje, R. and Smith, P.K., (2008). Cyberbullying: Another main type of bullying? Scandinavian Journal of Psychology, 49(2), pp.147-154..</li>
+		<li>Twitter Privacy Policy (2023). Twitter. Accessed, May 18, 2023, from: https://twitter.com/en/privacy.</li>
+		<li>Valcourt-Pearce, C.C., 2015. Technology and Multiple Disabilities: Learning What Works for Cree. Odyssey: New Directions in Deaf Education, 16, pp.51-55..</li>
+		<li>Venkatasubramanian, K., Skorinko, J.L., Kobeissi, M., Lewis, B., Jutras, N., Bosma, P., Mullaly, J., Kelly, B., Lloyd, D., Freark, M. and Alterio, N.A., (2021), May. Exploring a reporting tool to empower individuals with intellectual and developmental disabilities to self-report abuse. In Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems (pp. 1-13). .</li>
+		<li>Wennberg, B. and Kjellberg, A., 2010. Participation when using cognitive assistive devices–from the perspective of people with intellectual disabilities. Occupational therapy international, 17(4), pp.168-176..</li>
+		<li>Wright, M.F., (2017). Cyber victimization and depression among adolescents with intellectual disabilities and developmental disorders: The moderation of perceived social support. Journal of Mental Health Research in Intellectual Disabilities, 10(2), pp.126-143..</li>
+		<li>Ybarra, M.L., Mitchell, K.J., Palmer, N.A. and Reisner, S.L., 2015. Online social support as a buffer against online and offline peer and sexual victimization among US LGBT and non-LGBT youth. Child abuse & neglect, 39, pp.123-136..</li>
+		<li>Zhu, M., Zhang, X., & Wang, H. (2016, December). An LDA-based model for topic evolution: Evidence from information science journals. In 2016 international conference on modeling, simulation, and optimization technologies and applications (MSOTA2016) (pp. 49-54). Atlantis Press..</li>
+
+				
+	<o/l>
+</body>
+</html>
